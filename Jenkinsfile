@@ -5,7 +5,7 @@ pipeline {
 
         stage("Fetch Code") {
             steps {
-                git url: "https://github.com/", branch: "master"
+                git url: "https://github.com/phanison898/real-world-devops-project.git", branch: "main"
             }
         }
 
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     docker.image('express-server:latest').withRun { c ->
-                        sh "docker run --name my-container -d ${c.id}"
+                        sh "docker run -p 3000:3000 --name express-container -d ${c.id}"
                     }
                 }
             }
